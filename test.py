@@ -30,6 +30,9 @@
 
     return matches
 
+pattern = "abcDE"
+text = generate_text(100000, pattern, insert_every=300)
+
 import time
 start = time.time()
 print(yusuf_pro_matcher(text, pattern))
