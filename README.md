@@ -1,5 +1,5 @@
 # YusufProMatcher Algorithim
-## A String Matching Algorithm
+## A String Matching Algorithm (v2 updated with Skip Heuristic)
 ```
 def yusuf_pro_matcher(text: str, pattern: str) -> list:
     matches = []
@@ -46,7 +46,7 @@ def yusuf_pro_matcher(text: str, pattern: str) -> list:
 
     return matches
 ```
-## Benchmark Results :-
+## V1 Benchmark Results :-
 ### Test Case 1 : `text = "a" * 10_000 + "b"` & `pattern = "a" * 10_000 + "b"` 
 ```
 Benchmarking Results (Fastest First):
@@ -78,7 +78,7 @@ Naive Matcher             | 0.00104 sec,  Matches: 1
 KMP Matcher               | 0.00208 sec,  Matches: 1
 ```
 # Comparison Table
-| Feature / Algorithm         | `yusuf_pro_matcher`                                          | **Naïve Matching**                                 | **Knuth-Morris-Pratt (KMP)**                 | **Boyer-Moore (BM)**                                  | **Rabin-Karp (RK)**                 |
+| Feature / Algorithm         | `yusuf_pro_matcher (v1)`                                          | **Naïve Matching**                                 | **Knuth-Morris-Pratt (KMP)**                 | **Boyer-Moore (BM)**                                  | **Rabin-Karp (RK)**                 |
 | --------------------------- | ------------------------------------------------------------ | -------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------- | ----------------------------------- |
 | **Idea / Approach**         | Optimized Naïve with 3-char fast-check (first, middle, last) | Brute-force comparison of pattern at each position | Prefix table avoids rechecking known matches | Heuristic-based skipping (bad character, good suffix) | Hash-based comparison of substrings |
 | **Time Complexity (Worst)** | O(n·m)                                                       | O(n·m)                                             | O(n + m)                                     | O(n·m) (rare, worst case)                             | O(n·m) (due to hash collisions)     |
