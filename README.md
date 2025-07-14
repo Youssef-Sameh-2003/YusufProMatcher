@@ -50,14 +50,19 @@ def yusuf_pro_matcher(text: str, pattern: str) -> list:
 
 
 # Comparison Table
-Feature / Algorithm	YusufProMatcher (v2)	YusufProMatcher (v1)	Naïve Matching	Knuth-Morris-Pratt (KMP)	Boyer-Moore (BM)	Rabin-Karp (RK)
-Idea / Approach	Fast-check + Bad Char Skip Heuristic	Optimized Naïve with 3-char fast-check	Brute-force comparison of pattern at each position	Prefix table avoids rechecking known matches	Heuristic-based skipping (bad character, good suffix)	Hash-based comparison of substrings
-Time Complexity (Worst)	O(n·m) (if bad char rule doesn’t help)	O(n·m)	O(n·m)	O(n + m)	O(n·m) (rare, worst case)	O(n·m) (due to hash collisions)
-Time Complexity (Best)	O(n/m) (good skip cases)	O(n) (if checks filter fast)	O(n) (if first match early)	O(n + m)	O(n/m) (when heuristics succeed)	O(n + m) (ideal case)
-Space Complexity	O(m) (last occurrence map)	O(1)	O(1)	O(m) (prefix table)	O(m + alphabet size)	O(1) or O(n) (depending on hash)
-Preprocessing Needed	Yes (last occurrence table)	None	None	Yes (build prefix table)	Yes (build bad character / suffix tables)	Yes (compute hash of pattern)
-Heuristics Used	First, middle, last char + Bad Character	First, middle, last char only	None	Failure function	Bad character, good suffix	Hashing
-Best Use Case	Long texts, small pattern, medium match count	Short patterns, large text, few matches expected	Any case (educational/simple)	Frequent pattern matching	Large alphabets, long patterns	Searching multiple patterns
-Ease of Implementation	Easy	Very Easy	Very Easy	Moderate	Complex	Moderate
-Deterministic?	Yes	Yes	Yes	Yes	Yes	No (hash collisions possible)
-Adaptability	Semi-adaptive (bad-char table only)	Hard-coded heuristic	General-purpose	General-purpose	Highly optimized for long patterns	Good for many patterns
+
+| Feature / Algorithm         | **YusufProMatcher (v2)**                      | **YusufProMatcher (v1)**                         | **Naïve Matching**                                 | **Knuth-Morris-Pratt (KMP)**                 | **Boyer-Moore (BM)**                                  | **Rabin-Karp (RK)**                 |
+| --------------------------- | --------------------------------------------- | ------------------------------------------------ | -------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------- | ----------------------------------- |
+| **Idea / Approach**         | Fast-check + Bad Char Skip Heuristic          | Optimized Naïve with 3-char fast-check           | Brute-force comparison of pattern at each position | Prefix table avoids rechecking known matches | Heuristic-based skipping (bad character, good suffix) | Hash-based comparison of substrings |
+| **Time Complexity (Worst)** | O(n·m) (if bad char rule doesn’t help)        | O(n·m)                                           | O(n·m)                                             | O(n + m)                                     | O(n·m) (rare, worst case)                             | O(n·m) (due to hash collisions)     |
+| **Time Complexity (Best)**  | O(n/m) (good skip cases)                      | O(n) (if checks filter fast)                     | O(n) (if first match early)                        | O(n + m)                                     | O(n/m) (when heuristics succeed)                      | O(n + m) (ideal case)               |
+| **Space Complexity**        | O(m) (last occurrence map)                    | O(1)                                             | O(1)                                               | O(m) (prefix table)                          | O(m + alphabet size)                                  | O(1) or O(n) (depending on hash)    |
+| **Preprocessing Needed**    | Yes (last occurrence table)                   | None                                             | None                                               | Yes (build prefix table)                     | Yes (build bad character / suffix tables)             | Yes (compute hash of pattern)       |
+| **Heuristics Used**         | First, middle, last char + Bad Character      | First, middle, last char only                    | None                                               | Failure function                             | Bad character, good suffix                            | Hashing                             |
+| **Best Use Case**           | Long texts, small pattern, medium match count | Short patterns, large text, few matches expected | Any case (educational/simple)                      | Frequent pattern matching                    | Large alphabets, long patterns                        | Searching multiple patterns         |
+| **Ease of Implementation**  | Easy                                          | Very Easy                                        | Very Easy                                          | Moderate                                     | Complex                                               | Moderate                            |
+| **Deterministic?**          | Yes                                           | Yes                                              | Yes                                                | Yes                                          | Yes                                                   | No (hash collisions possible)       |
+| **Adaptability**            | Semi-adaptive (bad-char table only)           | Hard-coded heuristic                             | General-purpose                                    | General-purpose                              | Highly optimized for long patterns                    | Good for many patterns              |
+
+---
+
